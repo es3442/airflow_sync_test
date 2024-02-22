@@ -39,12 +39,12 @@ jobs:
           echo "${{ secrets.SH_SSH_PRIVATE_KEY }}" > $HOME/airflow-key.pem
           chmod 600 $HOME/airflow-key.pem
   
-          # 호스트 키 추가
-          ssh-keyscan -H 52.78.71.211 >> ~/.ssh/known_hosts
+          # # 호스트 키 추가
+          # ssh-keyscan -H 52.78.71.211 >> ~/.ssh/known_hosts
   
           # SSH 연결
           ssh -i $HOME/airflow-key.pem ubuntu@52.78.71.211
           echo "Success"
-          ssh -i $HOME/airflow-key.pem -o ProxyJump=ubuntu@52.78.71.211 ubuntu@10.0.139.50 'ls /home'
-          echo "Success2"
+          # ssh -i $HOME/airflow-key.pem -o ProxyJump=ubuntu@52.78.71.211 ubuntu@10.0.139.50 'ls /home'
+          # echo "Success2"
 
