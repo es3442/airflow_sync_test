@@ -29,3 +29,6 @@ jobs:
           ssh -i $HOME/.ssh/airflow-key.pem ubuntu@52.78.71.211
           echo "Success"
 
+          ssh -i $HOME/.ssh/airflow-key.pem -o ProxyJump=ubuntu@52.78.71.211 ubuntu@10.0.139.50 'ls /home'
+          echo "Success2"
+
