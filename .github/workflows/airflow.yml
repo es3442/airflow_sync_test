@@ -18,8 +18,9 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_EC2_METADATA_DISABLED: true
         run: |
-          echo "Showing AWS CLI version..."
+          echo "AWS CLI 버전 표시..."
           aws --version
+
 
       # - name: Sync Bucket
       #   uses: actions/setup-python@v3
