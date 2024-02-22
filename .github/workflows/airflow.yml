@@ -1,4 +1,4 @@
-name: Workflow Dags SYNC
+name: Airflow Dags SYNC
 
 on:
   push:
