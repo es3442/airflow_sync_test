@@ -33,7 +33,8 @@ jobs:
     steps:
       - name: Enter private EC2
         run: |
-          ssh -i $HOME/de-4-1-key.pem -o ProxyJump=ec2-user@bastion-host-ip ec2-user@10.0.139.241 'ls /home'
+          ssh -i $HOME/"de-4-1-key.pem" ProxyJump=ubuntu@ec2-43-203-182-0.ap-northeast-2.compute.amazonaws.com ubuntu@10.0.139.241 'ls /home'
+          #ssh -i $HOME/de-4-1-key.pem -o ProxyJump=ec2-user@bastion-host-ip ec2-user@10.0.139.241 'ls /home'
 
   # enter_private_ec2_airflow:
   #   runs-on: ubuntu-latest
