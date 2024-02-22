@@ -38,5 +38,8 @@ jobs:
           # 호스트 키 추가
           ssh-keyscan -H 52.78.71.211 >> $HOME/.ssh/known_hosts
           # SSH 연결 (변수 사용)
-          ssh -i $SSH_PRIVATE_KEY_PATH -o ProxyJump=ubuntu@52.78.71.211 ubuntu@10.0.139.50 'ls /home'
+          ssh -v -i $SSH_PRIVATE_KEY_PATH ubuntu@52.78.71.211
+          ssh -v -i $SSH_PRIVATE_KEY_PATH ubuntu@10.0.139.50
+          #ssh $SSH_PRIVATE_KEY_PATH -o ProxyJump=ubuntu@52.78.71.211 ubuntu@10.0.139.50 'ls /home'
+          # ssh -i $SSH_PRIVATE_KEY_PATH -o ProxyJump=ubuntu@52.78.71.211 ubuntu@10.0.139.50 'ls /home'
           echo "Success2"
