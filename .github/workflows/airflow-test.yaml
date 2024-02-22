@@ -53,5 +53,5 @@ jobs:
           key: ${{ secrets.SH_BASTION_HOST_SSH_KEY }}
           port: ${{ secrets.SH_BASTION_HOST_SSH_PORT }}
           script: |
-            ssh -i ~/airflow-key.pem ubuntu@10.0.139.50 'ls /home'
+            ssh -i ~/airflow-key.pem ubuntu@10.0.139.50 'sudo su airflow -c "sh /var/lib/airflow/scripts/s3_airflow_sync.sh"'
 
