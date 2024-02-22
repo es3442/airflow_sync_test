@@ -48,10 +48,10 @@ jobs:
       - name: SSH to Private EC2 via Bastion Host
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.BASTION_HOST_IP }}
-          username: ${{ secrets.BASTION_HOST_USER }}
-          key: ${{ secrets.BASTION_HOST_SSH_KEY }}
-          port: ${{ secrets.BASTION_HOST_SSH_PORT }}
+          host: ${{ secrets.SH_BASTION_HOST_IP }}
+          username: ${{ secrets.SH_BASTION_HOST_USER }}
+          key: ${{ secrets.SH_BASTION_HOST_SSH_KEY }}
+          port: ${{ secrets.SH_BASTION_HOST_SSH_PORT }}
           script: |
             ssh -i ~/airflow-key.pem ubuntu@10.0.139.50 'ls /home'
 
