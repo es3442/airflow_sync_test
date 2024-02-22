@@ -13,18 +13,19 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
         with:
-          fetch-depth: 0  # fetch all history for tags and branches
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_EC2_METADATA_DISABLED: true
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: <YOUR_AWS_REGION>  # AWS S3 Bucket이 있는 리전으로 교체
 
-      - name: Show AWS CLI Version
+      - name: Sync Dags to AWS S3
         run: |
-          echo "AWS CLI 버전 표시..."
-          aws --version
-
+          aws s3 sync \
+            --region ap-northeast-2 \
+            ./dags s3://de-4-1-bucket/airflow/dags
 
 
 
