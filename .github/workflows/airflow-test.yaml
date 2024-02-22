@@ -14,21 +14,25 @@ jobs:
       - name: Create SSH directory
         run: |
           mkdir -p $HOME/.ssh
-  
+
       - name: Prepare SSH key
         run: |
           echo "${{ secrets.SH_SSH_PRIVATE_KEY }}" > $HOME/.ssh/airflow-key.pem
           chmod 600 $HOME/.ssh/airflow-key.pem
-  
+
+      - name: Set SSH key path as environment variable
+        run: |
+          echo "SSH_PRIVATE_KEY_PATH=$HOME/.ssh/airflow-key.pem" >> $GITHUB_ENV
+
       - name: SSH to private EC2
         run: |
           # 호스트 키 추가
           ssh-keyscan -H 52.78.71.211 >> $HOME/.ssh/known_hosts
-  
+
           # SSH 연결
-          ssh -i $HOME/.ssh/airflow-key.pem ubuntu@52.78.71.211
+          ssh -i $SSH_PRIVATE_KEY_PATH ubuntu@52.78.71.211
           echo "Success"
 
-          ssh -i $HOME/.ssh/airflow-key.pem -o ProxyJump=ubuntu@52.78.71.211 ubuntu@10.0.139.50 'ls /home'
+          # 원격 서버에서 두 번째 서버로의 SSH 연결
+          ssh -i $SSH_PRIVATE_KEY_PATH -o ProxyJump=ubuntu@52.78.71.211 ubuntu@10.0.139.50 'ls /home'
           echo "Success2"
-
