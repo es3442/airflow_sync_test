@@ -34,6 +34,7 @@ jobs:
       - name: Enter private EC2
         run: |
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > $HOME/de-4-1-key.pem
+          chmod 600 $HOME/de-4-1-key.pem
           ssh -i $HOME/de-4-1-key.pem ec2-user@10.0.139.241 'ls /home'
           echo "Success"
 
@@ -43,6 +44,7 @@ jobs:
       - name: Enter private EC2 - airflow
         run: |
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > $HOME/de-4-1-key.pem
+          chmod 600 $HOME/de-4-1-key.pem
           ssh -i $HOME/de-4-1-key.pem ec2-user@10.0.139.241 "sudo su - airflow -c 'ls /var/lib/airflow/dags'"
           echo "Success2"
       # - name: Enter private EC2
