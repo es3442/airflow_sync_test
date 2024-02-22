@@ -37,7 +37,7 @@ jobs:
       - name: Enter private EC2
         run: |
           echo "${{ secrets.SH_SSH_PRIVATE_KEY }}" > $HOME/airflow-key.pem
-          chmod 600 $HOME/de-4-1-key.pem
+          chmod 600 $HOME/airflow-key.pem
   
           # 호스트 키 추가
           ssh-keyscan -H ec2-43-203-182-0.ap-northeast-2.compute.amazonaws.com >> ~/.ssh/known_hosts
