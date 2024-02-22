@@ -28,12 +28,22 @@ jobs:
             ./dags s3://de-4-1-bucket/airflow/dags \
             --delete
             echo "S3 Sync complete!"
-      - name: Sync AWS S3 to Airflow_prod
+      - name: Enter private EC2
         run: |
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > $HOME/de-4-1-key.pem
-          chmod 600 $HOME/de-4-1-key.pem
-          ssh -i $HOME/de-4-1-key.pem ec2-user@10.0.139.241 "sudo su - airflow -c 'aws s3 sync --region ap-northeast-2 s3://de-4-1-bucket/airflow/dags /var/lib/airflow/dags --delete'"
-          echo "Airflow prod server Sync complete!"
+          ssh -i $HOME/de-4-1-key.pem ec2-user@10.0.139.241 'ls /home'
+          echo "Success"
+      - name: Enter private EC2- airflow
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > $HOME/de-4-1-key.pem
+          ssh -i $HOME/de-4-1-key.pem ec2-user@10.0.139.241 "sudo su - airflow -c 'ls /var/lib/airflow/dags'"
+          echo "Success2"
+      
+      # - name: Sync AWS S3 to Airflow_prod
+      #   run: |
+      #     echo "${{ secrets.SSH_PRIVATE_KEY }}" > $HOME/de-4-1-key.pem
+      #     chmod 600 $HOME/de-4-1-key.pem
+      #     ssh -i $HOME/de-4-1-key.pem ec2-user@10.0.139.241 "sudo su - airflow -c 'aws s3 sync --region ap-northeast-2 s3://de-4-1-bucket/airflow/dags /var/lib/airflow/dags --delete'"
+      #     echo "Airflow prod server Sync complete!"
       # env:
       #   SSH_PRIVATE_KEY: $HOME/.ssh/de-4-1-key.pem
 
