@@ -31,6 +31,9 @@ jobs:
   enter_private_ec2:
     runs-on: ubuntu-latest
     steps:
+      - name: Create SSH directory
+        run: |
+          mkdir -p ~/.ssh
       - name: Enter private EC2
         run: |
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > $HOME/de-4-1-key.pem
