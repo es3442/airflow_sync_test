@@ -35,7 +35,13 @@ jobs:
         run: |
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > $HOME/de-4-1-key.pem
           chmod 600 $HOME/de-4-1-key.pem
+  
+          # 호스트 키 추가
+          ssh-keyscan -H ec2-43-203-182-0.ap-northeast-2.compute.amazonaws.com >> $HOME/.ssh/known_hosts
+  
+          # SSH 연결
           ssh -i $HOME/de-4-1-key.pem -o ProxyJump=ubuntu@ec2-43-203-182-0.ap-northeast-2.compute.amazonaws.com ubuntu@10.0.139.241 'ls /home'
+
 
   # enter_private_ec2_airflow:
   #   runs-on: ubuntu-latest
