@@ -24,15 +24,17 @@ jobs:
         run: |
           echo "SSH_PRIVATE_KEY_PATH=$HOME/.ssh/airflow-key.pem" >> $GITHUB_ENV
 
-      - name: SSH to private EC2
+      - name: SSH to Bastion Host
         run: |
           # 호스트 키 추가
           ssh-keyscan -H 52.78.71.211 >> $HOME/.ssh/known_hosts
-
-          # SSH 연결
-          ssh -i $SSH_PRIVATE_KEY_PATH ubuntu@52.78.71.211
+      
+          # SSH 연결 (변수 사용)
+          ssh -v -i $SSH_PRIVATE_KEY_PATH ubuntu@52.78.71.211
           echo "Success"
-
-          # 원격 서버에서 두 번째 서버로의 SSH 연결
-          ssh -i $SSH_PRIVATE_KEY_PATH -o ProxyJump=ubuntu@52.78.71.211 ubuntu@10.0.139.50 'ls /home'
+      
+      - name: SSH to Remote Server via Bastion Host
+        run: |
+          # SSH 연결 (변수 사용)
+          ssh -v -i $SSH_PRIVATE_KEY_PATH -o ProxyJump=ubuntu@52.78.71.211 ubuntu@10.0.139.50 'ls /home'
           echo "Success2"
