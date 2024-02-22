@@ -41,9 +41,9 @@ jobs:
       #     AWS_EC2_METADATA_DISABLED: true
       #   run: |
       #     echo "Syncing with AWS S3 Bucket..."
-          aws s3 sync \
-            --region ap-northeast-2 \
-            build s3:/de-4-1-bucket/airflow/dags \
-            --delete
+          # aws s3 sync \
+          #   --region ap-northeast-2 \
+          #   build s3:/de-4-1-bucket/airflow/dags \
+          #   --delete
       #     echo "Sync complete!"
       #   working-directory: ./my-agora-states-client
