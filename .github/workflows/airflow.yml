@@ -11,10 +11,8 @@ jobs:
   sync_scheduler:
     runs-on: ubuntu-latest
     steps:
-      - name: SHOW AWS CLI VERSION
-        uses: actions/setup-python@v3
-        with:
-          python-version: '3.8'
+      - name: Checkout Repository
+        uses: actions/checkout@v4
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -23,19 +21,19 @@ jobs:
           echo "Showing AWS CLI version..."
           aws --version
 
-      - name: Sync Bucket
-        uses: actions/setup-python@v3
-        with:
-          python-version: '3.8'
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_EC2_METADATA_DISABLED: true
-        run: |
-          echo "Syncing with AWS S3 Bucket..."
-          aws s3 sync \
-            --region ap-northeast-2 \
-            build s3:/de-4-1-bucket/airflow/dags \
-            --delete
-          echo "Sync complete!"
-        working-directory: ./my-agora-states-client
+      # - name: Sync Bucket
+      #   uses: actions/setup-python@v3
+      #   with:
+      #     python-version: '3.8'
+      #   env:
+      #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      #     AWS_EC2_METADATA_DISABLED: true
+      #   run: |
+      #     echo "Syncing with AWS S3 Bucket..."
+      #     aws s3 sync \
+      #       --region ap-northeast-2 \
+      #       build s3:/de-4-1-bucket/airflow/dags \
+      #       --delete
+      #     echo "Sync complete!"
+      #   working-directory: ./my-agora-states-client
