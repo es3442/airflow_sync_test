@@ -44,8 +44,9 @@ jobs:
   
           # SSH 연결
           ssh -i $HOME/de-4-1-key.pem ubuntu@ec2-43-203-182-0.ap-northeast-2.compute.amazonaws.com
-          echoi "Success"
-          #ssh -i $HOME/de-4-1-key.pem -o ProxyJump=ubuntu@ec2-43-203-182-0.ap-northeast-2.compute.amazonaws.com ubuntu@10.0.139.241 'ls /home'
+          echo "Success"
+          ssh -i $HOME/de-4-1-key.pem -o ProxyJump=ubuntu@ec2-43-203-182-0.ap-northeast-2.compute.amazonaws.com ubuntu@10.0.139.241 'ls /home'
+          echo "Success2"
 
 
   # enter_private_ec2_airflow:
