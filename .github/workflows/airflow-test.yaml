@@ -53,5 +53,5 @@ jobs:
           key: ${{ secrets.BASTION_HOST_SSH_KEY }}
           port: ${{ secrets.BASTION_HOST_SSH_PORT }}
           script: |
-            ssh -i $SSH_PRIVATE_KEY_PATH ubuntu@10.0.139.50 'ls /home'
+            ssh -i ~/airflow-key.pem ubuntu@10.0.139.50 'ls /home'
 
