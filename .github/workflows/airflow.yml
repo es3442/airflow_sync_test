@@ -30,10 +30,9 @@ jobs:
             echo "S3 Sync complete!"
       - name: Sync AWS S3 to Airflow_prod
         run: |
-          # SSH를 사용하여 EC2 서버에 연결하고 airflow 사용자로 전환
-          ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ec2-user@10.0.139.241 "sudo su - airflow -c '
-            # airflow 사용자로 전환 후 AWS S3와 동기화
-            aws s3 sync --region ap-northeast-2 s3://de-4-1-bucket/airflow/dags /var/lib/airflow/dags --delete
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > $HOME/de-4-1-key.pem
+          chmod 600 $HOME/de-4-1-key.pem
+          ssh -i $HOME/de-4-1-key.pem ec2-user@10.0.139.241 "sudo su - airflow -c 'aws s3 sync --region ap-northeast-2 s3://de-4-1-bucket/airflow/dags /var/lib/airflow/dags --delete'"
           echo "Airflow prod server Sync complete!"
       # env:
       #   SSH_PRIVATE_KEY: $HOME/.ssh/de-4-1-key.pem
