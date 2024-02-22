@@ -17,8 +17,8 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRETE_ACCESS_KEY }}
+          aws-access-key-id: ${{ secrets.SH_AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.SH_AWS_SECRETE_ACCESS_KEY }}
           aws-region: ap-northeast-2  # AWS S3 Bucket이 있는 리전으로 교체
 
       - name: Sync Dags to AWS S3
@@ -40,11 +40,11 @@ jobs:
           chmod 600 $HOME/airflow-key.pem
   
           # 호스트 키 추가
-          ssh-keyscan -H ec2-43-203-182-0.ap-northeast-2.compute.amazonaws.com >> ~/.ssh/known_hosts
+          ssh-keyscan -H ubuntu@52.78.71.211 >> ~/.ssh/known_hosts
   
           # SSH 연결
           ssh -i $HOME/airflow-key.pem ubuntu@52.78.71.211
           echo "Success"
-          ssh -i $HOME/airflow-key.pem -o ProxyJump=ubuntu@52.78.71.211 ubuntu@0.0.7.95 'ls /home'
+          ssh -i $HOME/airflow-key.pem -o ProxyJump=ubuntu@52.78.71.211 ubuntu@10.0.139.50 'ls /home'
           echo "Success2"
 
