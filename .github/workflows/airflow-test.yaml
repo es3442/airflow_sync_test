@@ -11,27 +11,27 @@ jobs:
   enter_private_ec2:
     runs-on: ubuntu-latest
     steps:
-      - name: Create SSH directory
-        run: |
-          mkdir -p $HOME/.ssh
+      # - name: Create SSH directory
+      #   run: |
+      #     mkdir -p $HOME/.ssh
 
-      - name: Prepare SSH key
-        run: |
-          echo "${{ secrets.SH_SSH_PRIVATE_KEY }}" > $HOME/.ssh/airflow-key.pem
-          chmod 600 $HOME/.ssh/airflow-key.pem
+      # - name: Prepare SSH key
+      #   run: |
+      #     echo "${{ secrets.SH_SSH_PRIVATE_KEY }}" > $HOME/.ssh/airflow-key.pem
+      #     chmod 600 $HOME/.ssh/airflow-key.pem
 
-      - name: Set SSH key path as environment variable
-        run: |
-          echo "SSH_PRIVATE_KEY_PATH=$HOME/.ssh/airflow-key.pem" >> $GITHUB_ENV
+      # - name: Set SSH key path as environment variable
+      #   run: |
+      #     echo "SSH_PRIVATE_KEY_PATH=$HOME/.ssh/airflow-key.pem" >> $GITHUB_ENV
 
-      - name: SSH to Bastion Host
-        run: |
-          # 호스트 키 추가
-          ssh-keyscan -H 52.78.71.211 >> $HOME/.ssh/known_hosts
+      # - name: SSH to Bastion Host
+      #   run: |
+      #     # 호스트 키 추가
+      #     ssh-keyscan -H 52.78.71.211 >> $HOME/.ssh/known_hosts
       
-          # SSH 연결 (변수 사용)
-          ssh -v -i $SSH_PRIVATE_KEY_PATH ubuntu@52.78.71.211
-          echo "Success"
+      #     # SSH 연결 (변수 사용)
+      #     ssh -v -i $SSH_PRIVATE_KEY_PATH ubuntu@52.78.71.211
+      #     echo "Success"
       
       # - name: SSH to Remote Server via Bastion Host
       #   run: |
