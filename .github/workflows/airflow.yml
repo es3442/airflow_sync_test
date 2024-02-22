@@ -25,7 +25,7 @@ jobs:
         run: |
           aws s3 sync \
             --region ap-northeast-2 \
-            ./dags s3://de-4-1-bucket/airflow/dags
+            ./dags s3://de-4-1-bucket/airflow/dags \
             --delete
             echo "Sync complete!"
 
